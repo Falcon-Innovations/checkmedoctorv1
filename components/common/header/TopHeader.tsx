@@ -28,6 +28,7 @@ const styles = StyleSheet.create({
         alignItems:"center",
         paddingTop:16,
         paddingBottom:12,
+        marginTop:10
     },
     headerText:{
         color:COLORS.neutral.neutral_400,

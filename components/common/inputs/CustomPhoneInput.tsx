@@ -71,8 +71,9 @@ const styles = StyleSheet.create({
     width: '100%',
     borderRadius: 6,
     backgroundColor: COLORS.neutral.neutral_50,
-    marginVertical: 8,
+    marginBottom:12,
     height: 50,
+
     
   },
   textInputStyle: {
@@ -80,6 +81,7 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.neutral.neutral_50,
     paddingLeft: 12,
     fontSize: 12,
+  
   },
   textContainerStyle: {
     backgroundColor: COLORS.neutral.neutral_50,
