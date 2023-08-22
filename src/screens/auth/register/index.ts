@@ -1,3 +1,4 @@
-import personalDetails from "./PeronalDetails"
+import PersonalDetails from "./PeronalDetails"
+import ProfessionalDetails from "./ProfessionalDetails"
 
-export {personalDetails}
+export {PersonalDetails,ProfessionalDetails}

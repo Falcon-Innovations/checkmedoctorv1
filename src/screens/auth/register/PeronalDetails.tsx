@@ -16,7 +16,7 @@ import {RootStackParamList} from '../../../navigation/AuthNavigation';
 import {KeyboadType} from '../../../../components/common/inputs/CustomInput';
 import { ButtonType } from '../../../../components/common/buttons/AppButton';
 
-type Props = NativeStackScreenProps<RootStackParamList, 'Login'>;
+type Props = NativeStackScreenProps<RootStackParamList, 'PersonalDetails'>;
 
 const PeronalDetails = ({navigation}:Props) => {
   const phoneInput = useRef(null);
@@ -242,7 +242,7 @@ const PeronalDetails = ({navigation}:Props) => {
           </View>
           <View style={styles.noAccount}>
             <Text style={styles.noAccountText}>Already have an account?</Text>
-            <TouchableOpacity onPress={() => navigation.navigate("PersonalDetails")} style={{alignSelf: 'center'}}>
+            <TouchableOpacity onPress={() => navigation.navigate("Login")} style={{alignSelf: 'center'}}>
               <Text style={styles.registerText}>Login</Text>
             </TouchableOpacity>
           </View>

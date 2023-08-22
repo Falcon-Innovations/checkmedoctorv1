@@ -20,7 +20,7 @@ import {KeyboadType} from '../../../components/common/inputs/CustomInput';
 import { RootStackParamList } from '../../navigation/AuthNavigation';
 
 
-type Props = NativeStackScreenProps<RootStackParamList, 'Login'>;
+type Props = NativeStackScreenProps<RootStackParamList, 'Login','PersonalDetails'>;
 const Login = ({navigation}:Props) => {
 
 
