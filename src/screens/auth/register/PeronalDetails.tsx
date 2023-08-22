@@ -1,5 +1,11 @@
 import React, {useState, useRef, useEffect} from 'react';
-import {StyleSheet, SafeAreaView, Text, View, TouchableOpacity} from 'react-native';
+import {
+  StyleSheet,
+  SafeAreaView,
+  Text,
+  View,
+  TouchableOpacity,
+} from 'react-native';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import axios from 'axios';
@@ -12,13 +18,13 @@ import {
   AppButton,
 } from '../../../../components';
 import {COLORS, SIZES} from '../../../../constants';
-import {RootStackParamList} from '../../../navigation/AuthNavigation';
+import {RootStackParamList} from '../../../../navigation/AuthNavigation';
 import {KeyboadType} from '../../../../components/common/inputs/CustomInput';
-import { ButtonType } from '../../../../components/common/buttons/AppButton';
+import {ButtonType} from '../../../../components/common/buttons/AppButton';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'PersonalDetails'>;
 
-const PeronalDetails = ({navigation}:Props) => {
+const PeronalDetails = ({navigation}: Props) => {
   const phoneInput = useRef(null);
 
   const [countryData, setCountryData] = useState<
@@ -182,7 +188,7 @@ const PeronalDetails = ({navigation}:Props) => {
               selectedValue={selectedCountry}
               onChange={value => {
                 setSelectedCountry(value);
-                handleInputChange(value, 'country')
+                handleInputChange(value, 'country');
                 handleState(value); // Fetch regions/states for the selected country
               }}
             />
@@ -193,7 +199,7 @@ const PeronalDetails = ({navigation}:Props) => {
               selectedValue={selectedRegion} // Use a separate state for the selected region
               onChange={value => {
                 setSelectedRegion(value);
-                handleInputChange(value, 'region')
+                handleInputChange(value, 'region');
                 handleCity(selectedCountry, value); // Fetch regions/states for the selected country
               }}
             />
@@ -202,7 +208,10 @@ const PeronalDetails = ({navigation}:Props) => {
               placeholder="Choose city"
               data={city}
               selectedValue={selectedCity}
-              onChange={value => {setSelectedCity(value); handleInputChange(value, 'city')}}
+              onChange={value => {
+                setSelectedCity(value);
+                handleInputChange(value, 'city');
+              }}
             />
             <CustomInput
               onChangeText={text => handleInputChange(text, 'password')}
@@ -228,24 +237,29 @@ const PeronalDetails = ({navigation}:Props) => {
                 <Text style={styles.errorText}>Passwords do not match</Text>
               )}
 
-          <View
-            style={{
-              alignSelf: 'center',
-              paddingHorizontal: 55,
-            }}>
-            <AppButton
-              label="Continue"
-              onPress={() => {console.log(inputs)}}
-              type={ButtonType.SOLID}
-              textColors={COLORS.white}
-            />
-          </View>
-          <View style={styles.noAccount}>
-            <Text style={styles.noAccountText}>Already have an account?</Text>
-            <TouchableOpacity onPress={() => navigation.navigate("Login")} style={{alignSelf: 'center'}}>
-              <Text style={styles.registerText}>Login</Text>
-            </TouchableOpacity>
-          </View>
+            <View
+              style={{
+                alignSelf: 'center',
+                paddingHorizontal: 55,
+              }}>
+              <AppButton
+                label="Continue"
+                onPress={() => {
+                  navigation.navigate('ProfessionalDetails');
+                  console.log(inputs);
+                }}
+                type={ButtonType.SOLID}
+                textColors={COLORS.white}
+              />
+            </View>
+            <View style={styles.noAccount}>
+              <Text style={styles.noAccountText}>Already have an account?</Text>
+              <TouchableOpacity
+                onPress={() => navigation.navigate('Login')}
+                style={{alignSelf: 'center'}}>
+                <Text style={styles.registerText}>Login</Text>
+              </TouchableOpacity>
+            </View>
           </View>
         </KeyboardAwareScrollView>
       </SafeAreaView>
@@ -289,7 +303,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     marginRight: 5,
   },
-  registerText:{
+  registerText: {
     color: COLORS.primary.primary_400,
     fontFamily: 'Poppins-SemiBold',
     fontSize: 16,

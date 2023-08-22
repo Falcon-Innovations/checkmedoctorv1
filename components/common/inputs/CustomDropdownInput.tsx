@@ -50,14 +50,7 @@ const CustomDropdownInput: React.FC<Props> = ({
         onChange(item.value); // Use item.value to get the selected value
         setIsFocus(false);
       }}
-      // renderLeftIcon={() => (
-      //   <AntDesign
-      //     style={styles.icon}
-      //     color={isFocus ? 'blue' : 'black'}
-      //     name="Safety"
-      //     size={20}
-      //   />
-      // )}
+  
     />
   );
 };

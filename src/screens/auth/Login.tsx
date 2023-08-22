@@ -17,13 +17,10 @@ import {AppButton, CustomInput} from '../../../components';
 import {ButtonType} from '../../../components/common/buttons/AppButton';
 import {COLORS, IMAGES, SIZES} from '../../../constants';
 import {KeyboadType} from '../../../components/common/inputs/CustomInput';
-import { RootStackParamList } from '../../navigation/AuthNavigation';
+import {RootStackParamList} from '../../../navigation/AuthNavigation';
 
-
-type Props = NativeStackScreenProps<RootStackParamList, 'Login','PersonalDetails'>;
-const Login = ({navigation}:Props) => {
-
-
+type Props = NativeStackScreenProps<RootStackParamList, 'Login'>;
+const Login = ({navigation}: Props) => {
   const [inputs, setInputs] = useState({
     password: '',
     email: '',
@@ -144,7 +141,9 @@ const Login = ({navigation}:Props) => {
           </View>
           <View style={styles.noAccount}>
             <Text style={styles.noAccountText}>Don’t have an account?</Text>
-            <TouchableOpacity onPress={() => navigation.navigate("PersonalDetails")} style={{alignSelf: 'center'}}>
+            <TouchableOpacity
+              onPress={() => navigation.navigate('PersonalDetails')}
+              style={{alignSelf: 'center'}}>
               <Text style={styles.registerText}>Register</Text>
             </TouchableOpacity>
           </View>
@@ -164,7 +163,7 @@ const styles = StyleSheet.create({
   image: {
     width: SIZES.screenWidth,
     height: SIZES.screenHeight * 0.46,
-    alignSelf:"center"
+    alignSelf: 'center',
   },
   login: {
     paddingHorizontal: SIZES.screenPaddingHorizontal,
@@ -203,7 +202,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     marginRight: 5,
   },
-  registerText:{
+  registerText: {
     color: COLORS.primary.primary_400,
     fontFamily: 'Poppins-SemiBold',
     fontSize: 16,

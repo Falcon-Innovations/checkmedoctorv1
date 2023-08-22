@@ -7,17 +7,15 @@ import {
   Keyboard,
   Alert,
 } from 'react-native';
-import React, { useState } from 'react'
+import React, {useState} from 'react';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 
-
-import { AppButton, CustomInput, TopHeader } from '../../../components'
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import { ButtonType } from '../../../components/common/buttons/AppButton';
-import { COLORS, IMAGES, SIZES } from '../../../constants';
-import { KeyboadType } from '../../../components/common/inputs/CustomInput';
-import { RootStackParamList } from '../../navigation/AuthNavigation';
-
+import {AppButton, CustomInput, TopHeader} from '../../../components';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
+import {ButtonType} from '../../../components/common/buttons/AppButton';
+import {COLORS, IMAGES, SIZES} from '../../../constants';
+import {KeyboadType} from '../../../components/common/inputs/CustomInput';
+import {RootStackParamList} from '../../../navigation/AuthNavigation';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'ForgotPassword'>;
 
@@ -112,7 +110,7 @@ const ForgotPassword = ({navigation}: Props) => {
   );
 };
 
-export default ForgotPassword
+export default ForgotPassword;
 
 const styles = StyleSheet.create({
   container: {
@@ -140,5 +138,4 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontFamily: 'Poppins-Regular',
   },
-
 });
