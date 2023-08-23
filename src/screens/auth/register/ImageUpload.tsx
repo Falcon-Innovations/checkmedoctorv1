@@ -32,6 +32,8 @@ const ImageUpload = () => {
     }
   };
 
+  console.log(image);
+
   return (
     <>
       <TopHeader screenTitle="Image Upload" />
@@ -60,11 +62,11 @@ const ImageUpload = () => {
               marginTop: 12,
             }}>
             <Image
-              source={{uri: IMAGES.fallBackImage}}
-              resizeMode="contain"
-              width={120}
-              height={120}
-              style={{alignSelf: 'center'}}
+              source={{uri: image ? image : IMAGES.fallBackImage}}
+              resizeMode="cover"
+              width={170}
+              height={170}
+              style={{alignSelf: 'center', borderRadius: 100}}
             />
             <View
               style={{
@@ -76,17 +78,39 @@ const ImageUpload = () => {
                 width={112}
                 label="Upload"
                 onPress={() => {
-                  console.log('how far');
-                  handleImagePicker;
+                  // console.log('how far');
+                  handleImagePicker();
                 }}
-                type={ButtonType.SOLID}
+                type={ButtonType.TEXT}
+                bgColor="#ffffff"
                 leftIcon={
-                  <Icon name="cloud-upload-outline" size={20} color="#ffffff" />
+                  <Icon
+                    name="cloud-upload-outline"
+                    size={20}
+                    color={COLORS.primary.primary_500}
+                  />
                 }
-                textColors={COLORS.white}
+                textColors={COLORS.primary.primary_500}
               />
             </View>
           </View>
+
+          {image && (
+            <View
+              style={{
+                alignSelf: 'center',
+                marginTop: SIZES.screenHeight * 0.05,
+              }}>
+              <AppButton
+                label="Complete Registration"
+                onPress={() => {
+                  console.log('Successs');
+                }}
+                type={ButtonType.SOLID}
+                textColors={COLORS.white}
+              />
+            </View>
+          )}
         </KeyboardAwareScrollView>
       </SafeAreaView>
     </>
