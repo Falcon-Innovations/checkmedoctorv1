@@ -20,6 +20,8 @@
     "react-native-dropdown-select-list": "^2.0.5",
     "react-native-element-dropdown": "^2.9.0",
     "react-native-elements": "^3.4.3",
+    "react-native-image-crop-picker": "^0.40.0",
+    "react-native-image-picker": "^5.6.1",
     "react-native-keyboard-aware-scroll-view": "^0.9.5",
     "react-native-paper": "^5.10.1",
     "react-native-phone-number-input": "^2.1.0",

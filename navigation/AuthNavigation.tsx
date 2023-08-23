@@ -1,6 +1,8 @@
 import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
+import {Onboarding} from '../src/screens/start';
+
 import {
   Login,
   ForgotPassword,
@@ -25,8 +27,9 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 const AuthNavigation = () => {
   return (
     <Stack.Navigator
-      initialRouteName="Login"
+      initialRouteName="onBoarding"
       screenOptions={{headerShown: false}}>
+      <Stack.Screen name="onBoarding" component={Onboarding} />
       <Stack.Screen name="Login" component={Login} />
       <Stack.Screen name="PersonalDetails" component={PersonalDetails} />
       <Stack.Screen

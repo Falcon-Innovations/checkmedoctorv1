@@ -16,19 +16,13 @@ const Stack = createNativeStackNavigator<MainRootStackParamList>();
 const Navigation = ({isAuthenticated}: {isAuthenticated: boolean}) => {
   return (
     <NavigationContainer>
-      {/* {isFirstLaunch ? (
-        <Stack.Navigator>
-          <Stack.Screen
-            name="onBoarding"
-            component={Onboarding}
-            options={{headerShown: false}}
-          />
-        </Stack.Navigator>
-      ) : isAuthenticated ? (
-        <MainNavigation />
-      ) : (
-        <AuthNavigation />
-      )} */}
+      {/* <Stack.Navigator>
+        <Stack.Screen
+          name="onBoarding"
+          component={Onboarding}
+          options={{headerShown: false}}
+        />
+      </Stack.Navigator> */}
 
       {isAuthenticated ? <MainNavigation /> : <AuthNavigation />}
     </NavigationContainer>

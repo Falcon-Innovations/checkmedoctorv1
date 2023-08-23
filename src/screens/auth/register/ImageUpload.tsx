@@ -1,23 +1,37 @@
-import {
-  ImageBackground,
-  SafeAreaView,
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native';
+import {Image, SafeAreaView, StyleSheet, Text, View} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import React from 'react';
+import React, {useState} from 'react';
+
+import ImageCropPicker from 'react-native-image-crop-picker';
+
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {RootStackParamList} from '../../../../navigation/AuthNavigation';
 import {AppButton, TopHeader} from '../../../../components';
 import {CommonAuthHeader} from '../../../../components/common/header';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
-import {COLORS, SIZES} from '../../../../constants';
+import {COLORS, IMAGES, SIZES} from '../../../../constants';
 import {ButtonType} from '../../../../components/common/buttons/AppButton';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'ImageUpload'>;
 
 const ImageUpload = () => {
+  const [image, setImage] = useState<string | null>(null);
+
+  const handleImagePicker = async () => {
+    try {
+      const image = await ImageCropPicker.openPicker({
+        width: 300,
+        height: 400,
+        cropping: true,
+        includeBase64: true,
+      });
+
+      setImage(image.path);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <>
       <TopHeader screenTitle="Image Upload" />
@@ -34,15 +48,24 @@ const ImageUpload = () => {
 
           <View
             style={{
-              paddingLeft: 10,
               alignSelf: 'center',
+              justifyContent: 'center',
+              alignItems: 'center',
               height: 180,
               width: 180,
               borderWidth: 1,
               borderStyle: 'dashed',
               borderColor: '#202325',
               borderRadius: 100,
+              marginTop: 12,
             }}>
+            <Image
+              source={{uri: IMAGES.fallBackImage}}
+              resizeMode="contain"
+              width={120}
+              height={120}
+              style={{alignSelf: 'center'}}
+            />
             <View
               style={{
                 alignSelf: 'center',
@@ -54,6 +77,7 @@ const ImageUpload = () => {
                 label="Upload"
                 onPress={() => {
                   console.log('how far');
+                  handleImagePicker;
                 }}
                 type={ButtonType.SOLID}
                 leftIcon={

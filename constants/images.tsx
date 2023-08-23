@@ -7,6 +7,8 @@ const IMAGES = {
     'https://res.cloudinary.com/dftozcqnt/image/upload/v1684668540/update_password_v85pou.png',
   onBoardImage:
     'https://res.cloudinary.com/dftozcqnt/image/upload/v1684770749/medium-shot-smiley-doctor-with-coat-removebg-preview_mdh1to.png',
+  fallBackImage:
+    'https://res.cloudinary.com/dftozcqnt/image/upload/v1692796294/Images-rafiki_1_mmjp5c.png',
 };
 
-export {IMAGES}
+export {IMAGES};
