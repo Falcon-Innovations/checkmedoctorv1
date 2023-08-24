@@ -14,7 +14,7 @@ import {ButtonType} from '../../../../components/common/buttons/AppButton';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'ImageUpload'>;
 
-const ImageUpload = () => {
+const ImageUpload = ({navigation}: Props) => {
   const [image, setImage] = useState<string | null>(null);
 
   const handleImagePicker = async () => {
@@ -105,6 +105,7 @@ const ImageUpload = () => {
                 label="Complete Registration"
                 onPress={() => {
                   console.log('Successs');
+                  navigation.navigate('OTPVerification');
                 }}
                 type={ButtonType.SOLID}
                 textColors={COLORS.white}

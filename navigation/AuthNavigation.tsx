@@ -10,6 +10,7 @@ import {
   PersonalDetails,
   ProfessionalDetails,
   ImageUpload,
+  OTPVerification,
 } from '../src/screens/auth';
 
 export type RootStackParamList = {
@@ -20,6 +21,7 @@ export type RootStackParamList = {
   ResetPassword: undefined;
   ImageUpload: undefined;
   onBoarding: undefined;
+  OTPVerification: undefined;
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -32,6 +34,7 @@ const AuthNavigation = () => {
       <Stack.Screen name="onBoarding" component={Onboarding} />
       <Stack.Screen name="Login" component={Login} />
       <Stack.Screen name="PersonalDetails" component={PersonalDetails} />
+      <Stack.Screen name="OTPVerification" component={OTPVerification} />
       <Stack.Screen
         name="ProfessionalDetails"
         component={ProfessionalDetails}
