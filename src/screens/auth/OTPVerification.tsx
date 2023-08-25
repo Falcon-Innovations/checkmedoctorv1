@@ -18,8 +18,12 @@ import {AppButton, TopHeader} from '../../../components';
 import {CommonAuthHeader} from '../../../components/common/header';
 import {COLORS, IMAGES, SIZES} from '../../../constants';
 import {ButtonType} from '../../../components/common/buttons/AppButton';
+import {NativeStackScreenProps} from '@react-navigation/native-stack';
+import {RootStackParamList} from '../../../navigation/AuthNavigation';
 
-const OTPVerification: React.FC = () => {
+type Props = NativeStackScreenProps<RootStackParamList, 'OTPVerification'>;
+
+const OTPVerification = ({navigation}: Props) => {
   const [otpInput, setOtpInput] = useState<string>('');
 
   const input = useRef<OTPTextView>(null);
@@ -75,7 +79,7 @@ const OTPVerification: React.FC = () => {
               handleCellTextChange={handleCellTextChange}
               inputCount={4}
               keyboardType="numeric"
-              defaultValue="4563"
+              // defaultValue="4563"
               tintColor={COLORS.primary.primary_400}
             />
             <View
@@ -106,7 +110,10 @@ const OTPVerification: React.FC = () => {
             </View>
             <View style={styles.buttonWrapper}>
               <AppButton
-                onPress={showTextAlert}
+                onPress={() => {
+                  showTextAlert();
+                  navigation.navigate('RegistrationConfirmation');
+                }}
                 type={ButtonType.SOLID}
                 label="Verify Code"
                 textColors="white"
@@ -132,8 +139,8 @@ const styles = StyleSheet.create({
     marginBottom: 50,
   },
   title: {
-    fontSize: 20,
-    fontFamily: 'Poppins-Medium',
+    fontSize: 18,
+    fontFamily: 'Poppins-SemiBold',
     color: COLORS.neutral.neutral_400,
     marginBottom: 2,
   },

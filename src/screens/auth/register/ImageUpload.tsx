@@ -95,23 +95,23 @@ const ImageUpload = ({navigation}: Props) => {
             </View>
           </View>
 
-          {image && (
-            <View
-              style={{
-                alignSelf: 'center',
-                marginTop: SIZES.screenHeight * 0.05,
-              }}>
-              <AppButton
-                label="Complete Registration"
-                onPress={() => {
-                  console.log('Successs');
-                  navigation.navigate('OTPVerification');
-                }}
-                type={ButtonType.SOLID}
-                textColors={COLORS.white}
-              />
-            </View>
-          )}
+          {/* {image && ( */}
+          <View
+            style={{
+              alignSelf: 'center',
+              marginTop: SIZES.screenHeight * 0.05,
+            }}>
+            <AppButton
+              label="Complete Registration"
+              onPress={() => {
+                console.log('Successs');
+                navigation.navigate('OTPVerification');
+              }}
+              type={ButtonType.SOLID}
+              textColors={COLORS.white}
+            />
+          </View>
+          {/* )} */}
         </KeyboardAwareScrollView>
       </SafeAreaView>
     </>

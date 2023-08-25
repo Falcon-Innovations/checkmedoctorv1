@@ -11,6 +11,7 @@ import {
   ProfessionalDetails,
   ImageUpload,
   OTPVerification,
+  RegistrationConfirmation,
 } from '../src/screens/auth';
 
 export type RootStackParamList = {
@@ -22,6 +23,7 @@ export type RootStackParamList = {
   ImageUpload: undefined;
   onBoarding: undefined;
   OTPVerification: undefined;
+  RegistrationConfirmation: undefined;
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -34,12 +36,16 @@ const AuthNavigation = () => {
       <Stack.Screen name="onBoarding" component={Onboarding} />
       <Stack.Screen name="Login" component={Login} />
       <Stack.Screen name="PersonalDetails" component={PersonalDetails} />
-      <Stack.Screen name="OTPVerification" component={OTPVerification} />
       <Stack.Screen
         name="ProfessionalDetails"
         component={ProfessionalDetails}
       />
       <Stack.Screen name="ImageUpload" component={ImageUpload} />
+      <Stack.Screen name="OTPVerification" component={OTPVerification} />
+      <Stack.Screen
+        name="RegistrationConfirmation"
+        component={RegistrationConfirmation}
+      />
       <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
       <Stack.Screen name="ResetPassword" component={ResetPassword} />
     </Stack.Navigator>
