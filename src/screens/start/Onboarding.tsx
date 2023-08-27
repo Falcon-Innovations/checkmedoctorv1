@@ -6,7 +6,7 @@ import {
   Text,
   View,
 } from 'react-native';
-import React, {useState} from 'react';
+import React from 'react';
 import Icon from 'react-native-vector-icons/Feather';
 
 import {COLORS, IMAGES, SIZES} from '../../../constants';
@@ -17,7 +17,6 @@ import {NativeStackScreenProps} from '@react-navigation/native-stack';
 type Props = NativeStackScreenProps<RootStackParamList, 'onBoarding'>;
 
 const Onboarding = ({navigation}: Props) => {
-  const [loading, setLoading] = useState(false);
   return (
     <>
       <StatusBar

@@ -1,0 +1,31 @@
+{
+  "env": {
+    "es2021": true,
+    "node": true,
+    "react-native/react-native": true // whitelist all browser-like globals
+  },
+  "extends": [
+    "plugin:react/recommended",
+    "airbnb",
+    "airbnb-typescript",
+    "prettier"
+  ],
+  "overrides": [],
+  "parserOptions": {
+    "ecmaVersion": "latest",
+    "sourceType": "module",
+    "project": "./tsconfig.json"
+  },
+  "plugins": ["react", "react-native"],
+  "rules": {
+    "react-native/no-unused-styles": 2, // disallow unused styles
+    "react-native/no-inline-styles": 2, // disallow styles declared within the component itself
+    "react-native/no-color-literals": 2, // enforces variable names to be used for storing colors
+    "react/require-default-props": "off",
+    "import/extensions": "off",
+    "react/jsx-props-no-spreading": "off",
+    "import/prefer-default-export": "off",
+    "no-use-before-define": "off",
+    "@typescript-eslint/no-use-before-define": "off"
+  }
+}

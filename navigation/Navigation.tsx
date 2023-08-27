@@ -1,11 +1,10 @@
 import {NavigationContainer} from '@react-navigation/native';
-import {View, Text, ActivityIndicator} from 'react-native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import MainNavigation from './MainNavigation';
 import AuthNavigation from './AuthNavigation';
-import {Onboarding} from '../src/screens/start';
+import {useAuthContext} from '../src/contexts/authContext';
+import Loader from '../components/loader';
 
 export type MainRootStackParamList = {
   onBoarding: undefined;
@@ -13,18 +12,16 @@ export type MainRootStackParamList = {
 
 const Stack = createNativeStackNavigator<MainRootStackParamList>();
 
-const Navigation = ({isAuthenticated}: {isAuthenticated: boolean}) => {
+const Navigation = () => {
+  const {userToken, isLoading} = useAuthContext()
+
+  if (isLoading) {
+    return <Loader />
+  }
+
   return (
     <NavigationContainer>
-      {/* <Stack.Navigator>
-        <Stack.Screen
-          name="onBoarding"
-          component={Onboarding}
-          options={{headerShown: false}}
-        />
-      </Stack.Navigator> */}
-
-      {isAuthenticated ? <MainNavigation /> : <AuthNavigation />}
+      {userToken ? <MainNavigation /> : <AuthNavigation />}
     </NavigationContainer>
   );
 };

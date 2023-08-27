@@ -1,19 +1,19 @@
 import React, {useState} from 'react';
-import {StyleSheet,Text} from 'react-native';
+import {StyleSheet, Text} from 'react-native';
 import {TextInput} from 'react-native-paper';
 import {COLORS} from '../../../constants';
 
 
 export enum Mode {
-OUTLINED = 'outlined',
-FLAT = 'flat'
+  OUTLINED = 'outlined',
+  FLAT = 'flat'
 }
 
 export enum KeyboadType {
   NUMBER_PAD = 'number-pad',
   DEFAULT = 'default',
   EMAIL_ADDRESS = 'email-address',
-  NUMERIC="numeric"
+  NUMERIC = "numeric"
 }
 
 interface CustomInputProps {
@@ -23,9 +23,9 @@ interface CustomInputProps {
   errors?: any;
   onChangeText: (text: string) => void;
   secureTextEntry?: boolean;
-  iconLeft?:boolean;
+  iconLeft?: boolean;
   iconName?: string;
-  iconLibrary?:JSX.Element;
+  iconLibrary?: JSX.Element;
   onFocus?: () => void;
   email?: boolean;
   password?: boolean;
@@ -99,6 +99,8 @@ const CustomInput: React.FC<CustomInputProps> = ({
   return (
     <>
       <TextInput
+        autoCapitalize='none'
+        autoCorrect={false}
         mode={mode}
         label={label}
         multiline={mutliline}
@@ -146,10 +148,10 @@ const styles = StyleSheet.create({
   },
   inputContainer: {
     backgroundColor: COLORS.neutral.neutral_50,
-    fontSize:12,
-    fontFamily:"Poppins-Regular",
-    color:COLORS.neutral.neutral_400,
-    marginBottom:12,
+    fontSize: 12,
+    fontFamily: "Poppins-Regular",
+    color: COLORS.neutral.neutral_400,
+    marginBottom: 12,
   },
   errorText: {
     color: COLORS.red.red_500,

@@ -18,9 +18,11 @@ import {ButtonType} from '../../../components/common/buttons/AppButton';
 import {COLORS, IMAGES, SIZES} from '../../../constants';
 import {KeyboadType} from '../../../components/common/inputs/CustomInput';
 import {RootStackParamList} from '../../../navigation/AuthNavigation';
+import {useLogin} from '../../api/auth/login';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Login'>;
 const Login = ({navigation}: Props) => {
+  const {isLoading, error, mutate} = useLogin();
   const [inputs, setInputs] = useState({
     password: '',
     email: '',
@@ -52,18 +54,7 @@ const Login = ({navigation}: Props) => {
       isValid = false;
     }
 
-    if (
-      inputs.password &&
-      !/(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+]).{8,}/.test(
-        inputs.password,
-      )
-    ) {
-      isValid = false;
-      handleErrors(
-        'Password must contain at least 8 characters including 1 uppercase letter, 1 lowercase letter, 1 number, and 1 special character',
-        'password',
-      );
-    } else if (!inputs.password) {
+    if (!inputs.password) {
       isValid = false;
       handleErrors('This field is required', 'password');
     }
@@ -73,6 +64,10 @@ const Login = ({navigation}: Props) => {
         'Valid',
         `Your email is ${inputs.email} password ${inputs.password} `,
       );
+      mutate({
+        email: inputs.email,
+        password: inputs.password,
+      })
     } else {
       Alert.alert('Invalid');
     }
@@ -133,7 +128,7 @@ const Login = ({navigation}: Props) => {
               paddingHorizontal: 55,
             }}>
             <AppButton
-              label="Login"
+              label={isLoading ? 'Loading....' : 'Login'}
               onPress={handleValidation}
               type={ButtonType.SOLID}
               textColors={COLORS.white}
