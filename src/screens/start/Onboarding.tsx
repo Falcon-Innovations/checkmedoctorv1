@@ -14,7 +14,7 @@ import {AppButton} from '../../../components';
 import {RootStackParamList} from '../../../navigation/AuthNavigation';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 
-type Props = NativeStackScreenProps<RootStackParamList, 'onBoarding'>;
+type Props = NativeStackScreenProps<RootStackParamList, "onBoarding">;
 
 const Onboarding = ({navigation}: Props) => {
   return (

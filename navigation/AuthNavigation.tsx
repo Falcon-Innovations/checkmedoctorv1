@@ -1,7 +1,7 @@
-import React from 'react';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import React from "react";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-import {Onboarding} from '../src/screens/start';
+import { Onboarding } from "../src/screens/start";
 
 import {
   Login,
@@ -12,7 +12,7 @@ import {
   ImageUpload,
   OTPVerification,
   RegistrationConfirmation,
-} from '../src/screens/auth';
+} from "../src/screens/auth";
 
 export type RootStackParamList = {
   Login: undefined;
@@ -32,8 +32,8 @@ const AuthNavigation = () => {
   return (
     <Stack.Navigator
       initialRouteName="onBoarding"
-      screenOptions={{headerShown: false}}>
-      <Stack.Screen name="onBoarding" component={Onboarding} />
+      screenOptions={{ headerShown: false }}
+    >
       <Stack.Screen name="Login" component={Login} />
       <Stack.Screen name="PersonalDetails" component={PersonalDetails} />
       <Stack.Screen
