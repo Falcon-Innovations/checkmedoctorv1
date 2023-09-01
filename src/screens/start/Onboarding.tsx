@@ -65,7 +65,7 @@ const Onboarding = ({navigation}: Props) => {
           }}>
           <AppButton
             label="Get Started"
-            onPress={() => navigation.navigate('Login')}
+            onPress={() => navigation.navigate('PersonalDetails')}
             width={SIZES.screenWidth * 0.4}
             bgColor={COLORS.white}
             rightIcon={

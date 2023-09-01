@@ -13,6 +13,7 @@ import {
   OTPVerification,
   RegistrationConfirmation,
 } from '../src/screens/auth';
+import useGetOnboardingStatus from '../hooks/useOnboardingStatus';
 
 export type RootStackParamList = {
   Login: undefined;
@@ -29,13 +30,20 @@ export type RootStackParamList = {
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 const AuthNavigation = () => {
+  const {isFirstLaunch, isLoading} = useGetOnboardingStatus();
+
+  if (isLoading) {
+    return null;
+  }
+
+
   return (
     <Stack.Navigator
       initialRouteName="onBoarding"
       screenOptions={{headerShown: false}}>
       <Stack.Screen name="onBoarding" component={Onboarding} />
-      <Stack.Screen name="Login" component={Login} />
       <Stack.Screen name="PersonalDetails" component={PersonalDetails} />
+      <Stack.Screen name="Login" component={Login} />
       <Stack.Screen
         name="ProfessionalDetails"
         component={ProfessionalDetails}

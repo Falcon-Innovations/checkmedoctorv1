@@ -64,8 +64,8 @@ const AppButton: React.FC<ButtonProps> = ({
           type === ButtonType.SOLID
             ? [styles.solid, {backgroundColor: backGroundColor}]
             : type === ButtonType.OUTLINED
-            ? [{borderColor: borderColors}, styles.outlined]
-            : [styles.text, {backgroundColor: backGroundColor}],
+              ? [{borderColor: borderColors}, styles.outlined]
+              : [styles.text, {backgroundColor: backGroundColor}],
           loading && [{backgroundColor: backGroundColor}],
           disabled && [styles.disabled, {backgroundColor: backGroundColor}],
         ]}
@@ -95,22 +95,19 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     marginVertical: 10,
   },
-  disabledButton: {},
   buttonText: {
     fontSize: 16,
     textAlign: 'center',
     fontFamily: 'Poppins-Medium',
     alignSelf: 'center',
   },
-
-  solid: {},
   outlined: {
     backgroundColor: 'transparent',
     borderWidth: 1,
   },
-
-  text: {},
-  disabled: {},
+  disabled: {
+    opacity: 0.4,
+  },
 });
 
 export default AppButton;

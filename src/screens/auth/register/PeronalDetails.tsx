@@ -21,17 +21,25 @@ import {COLORS, SIZES} from '../../../../constants';
 import {RootStackParamList} from '../../../../navigation/AuthNavigation';
 import {KeyboadType} from '../../../../components/common/inputs/CustomInput';
 import {ButtonType} from '../../../../components/common/buttons/AppButton';
+import {useSignUp} from '../../../api/auth/sign-up';
+import Loader from '../../../../components/loader';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'PersonalDetails'>;
 
+
+type Option = {
+  value: string;
+  label: string;
+}
+
 const PeronalDetails = ({navigation}: Props) => {
   const phoneInput = useRef(null);
-
+  const {isLoading, mutate} = useSignUp();
   const [countryData, setCountryData] = useState<
-    {value: string; label: string}[]
+    Option[]
   >([]);
-  const [region, setRegion] = useState<{value: string; label: string}[]>([]);
-  const [city, setCity] = useState<{value: string; label: string}[]>([]);
+  const [region, setRegion] = useState<Option[]>([]);
+  const [city, setCity] = useState<Option[]>([]);
   const [selectedCountry, setSelectedCountry] = useState('');
   const [selectedRegion, setSelectedRegion] = useState('');
   const [selectedCity, setSelectedCity] = useState('');
@@ -78,7 +86,7 @@ const PeronalDetails = ({navigation}: Props) => {
     setRegion([]);
   }, [selectedCountry]);
 
-  const handleState = (countryCode: any) => {
+  const handleState = (countryCode: string) => {
     var config = {
       method: 'get',
       url: `https://api.countrystatecity.in/v1/countries/${countryCode}/states`,
@@ -142,8 +150,21 @@ const PeronalDetails = ({navigation}: Props) => {
     setInputs(prevState => ({...prevState, [input]: value}));
   };
 
+  const handleRegister = () => {
+    mutate({
+      country: selectedCountry,
+      region: selectedRegion,
+      city: selectedCity,
+      email: inputs?.emailAddress,
+      password: inputs?.password,
+      firstName: inputs?.fullName,
+      telephone: `+237${inputs?.phoneNumber}`,
+    });
+  };
+
   return (
     <>
+      {isLoading && <Loader />}
       <TopHeader screenTitle="Specialist Registration" />
       <SafeAreaView style={{flex: 1}}>
         <KeyboardAwareScrollView
@@ -243,11 +264,9 @@ const PeronalDetails = ({navigation}: Props) => {
                 paddingHorizontal: 55,
               }}>
               <AppButton
-                label="Continue"
-                onPress={() => {
-                  navigation.navigate('ProfessionalDetails');
-                  console.log(inputs);
-                }}
+                label={isLoading ? "Loading..." : "Continue"}
+                disabled={isLoading || !inputs?.password || !inputs?.fullName || !inputs?.emailAddress || !inputs?.phoneNumber}
+                onPress={handleRegister}
                 type={ButtonType.SOLID}
                 textColors={COLORS.white}
               />
