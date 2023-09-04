@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {StyleSheet, Text} from 'react-native';
 import {Dropdown} from 'react-native-element-dropdown';
-import { COLORS } from '../../../constants';
+import {COLORS} from '../../../constants';
 
 
 interface Option {
@@ -14,7 +14,7 @@ interface Props {
   label?: string;
   data: Option[];
   selectedValue: string;
-  onChange: (value: string) => void;
+  onChange: (value: Option) => void;
 }
 
 
@@ -27,11 +27,9 @@ const CustomDropdownInput: React.FC<Props> = ({
 }) => {
   const [isFocus, setIsFocus] = useState(false);
 
-   const dropdownData = data.map(option => option.value);
-
   return (
     <Dropdown
-      style={[styles.dropdown, isFocus && {borderColor: COLORS.primary.primary_500, borderWidth: 1,}]}
+      style={[styles.dropdown, isFocus && {borderColor: COLORS.primary.primary_500, borderWidth: 1, }]}
       placeholderStyle={styles.placeholderStyle}
       selectedTextStyle={styles.selectedTextStyle}
       inputSearchStyle={styles.inputSearchStyle}
@@ -47,10 +45,10 @@ const CustomDropdownInput: React.FC<Props> = ({
       onFocus={() => setIsFocus(true)}
       onBlur={() => setIsFocus(false)}
       onChange={item => {
-        onChange(item.value); // Use item.value to get the selected value
+        onChange(item); // Use item.value to get the selected value
         setIsFocus(false);
       }}
-  
+
     />
   );
 };
@@ -62,8 +60,8 @@ const styles = StyleSheet.create({
     height: 50,
     borderRadius: 8,
     paddingHorizontal: 12,
-    marginBottom:12,
-    backgroundColor:COLORS.neutral.neutral_50,
+    marginBottom: 12,
+    backgroundColor: COLORS.neutral.neutral_50,
   },
   icon: {
     marginRight: 5,
@@ -80,7 +78,7 @@ const styles = StyleSheet.create({
   placeholderStyle: {
     fontSize: 14,
     fontFamily: 'Poppins-Regular',
-    color:COLORS.neutral.neutral_200
+    color: COLORS.neutral.neutral_200
   },
   selectedTextStyle: {
     fontSize: 14,

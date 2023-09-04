@@ -98,6 +98,11 @@ const CustomInput: React.FC<CustomInputProps> = ({
 
   return (
     <>
+      {isFocused && error ? (
+        <Text style={styles.errorText}>'{error}'</Text>
+      ) : errors ? (
+        <Text style={styles.errorText}>"{errors}"</Text>
+      ) : null}
       <TextInput
         autoCapitalize='none'
         autoCorrect={false}
@@ -133,11 +138,6 @@ const CustomInput: React.FC<CustomInputProps> = ({
           )
         }
       />
-      {isFocused && error ? (
-        <Text style={styles.errorText}>{error}</Text>
-      ) : errors ? (
-        <Text style={styles.errorText}>{errors}</Text>
-      ) : null}
     </>
   );
 };
@@ -157,7 +157,6 @@ const styles = StyleSheet.create({
     color: COLORS.red.red_500,
     fontSize: 12,
     fontFamily: 'Poppins-Regular',
-    // marginTop: 12,
   },
 
 });

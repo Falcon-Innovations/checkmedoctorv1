@@ -7,4 +7,5 @@ export const Routes = {
   RegistrationConfirmation: 'RegistrationConfirmation',
   OnBoarding: 'onBoarding',
   PersonalDetails: 'PersonalDetails',
+  ProfessionalDetails: 'ProfessionalDetails',
 };

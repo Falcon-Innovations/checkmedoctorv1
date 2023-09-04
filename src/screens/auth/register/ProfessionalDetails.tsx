@@ -1,5 +1,5 @@
 import {View, Text, SafeAreaView, StyleSheet} from 'react-native';
-import React, {useRef, useState} from 'react';
+import React, {useState} from 'react';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 
@@ -21,7 +21,6 @@ const data = [
 ];
 
 const ProfessionalDetails = ({navigation}: Props) => {
-  const phoneInput = useRef(null);
   const [inputs, setInputs] = useState({
     specialities: [],
     medicalLicenseNum: '',

@@ -4,9 +4,6 @@ import {
   View,
   SafeAreaView,
   Image,
-  Alert,
-  TextInput,
-  Button,
   TouchableOpacity,
 } from 'react-native';
 import React, {useState, useRef} from 'react';
@@ -14,25 +11,24 @@ import OTPTextView from 'react-native-otp-textinput';
 import Clipboard from '@react-native-clipboard/clipboard';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 
-import {AppButton, TopHeader} from '../../../components';
-import {CommonAuthHeader} from '../../../components/common/header';
+import {AppButton} from '../../../components';
 import {COLORS, IMAGES, SIZES} from '../../../constants';
 import {ButtonType} from '../../../components/common/buttons/AppButton';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {RootStackParamList} from '../../../navigation/AuthNavigation';
+import {useConfirmAccount} from '../../api/auth/confirm-account';
+import Loader from '../../../components/loader';
+import {useSendOTP} from '../../api/auth/send-otp';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'OTPVerification'>;
 
-const OTPVerification = ({navigation}: Props) => {
+const OTPVerification = ({route}: Props) => {
+  const {isLoading, mutate} = useConfirmAccount();
+  const {isLoading: isSendLoading, mutate: mutateSend} = useSendOTP()
+
   const [otpInput, setOtpInput] = useState<string>('');
 
   const input = useRef<OTPTextView>(null);
-
-  const clear = () => input.current?.clear();
-
-  const updateOtpText = () => input.current?.setValue(otpInput);
-
-  const showTextAlert = () => otpInput && Alert.alert(otpInput);
 
   const handleCellTextChange = async (text: string, i: number) => {
     if (i === 0) {
@@ -43,9 +39,15 @@ const OTPVerification = ({navigation}: Props) => {
     }
   };
 
+  const handleValidateOtp = () =>
+    mutate({phoneNumber: route.params?.telephone, smsCode: otpInput});
+  const handleResend = () =>
+    mutateSend({phoneNumber: route.params?.telephone})
+
+
   return (
     <>
-      {/* <TopHeader screenTitle='OTP Verification'/> */}
+      {isLoading && <Loader />}
       <SafeAreaView style={{flex: 1}}>
         <KeyboardAwareScrollView
           extraHeight={100}
@@ -67,7 +69,7 @@ const OTPVerification = ({navigation}: Props) => {
                   fontFamily: 'Poppins-SemiBold',
                   color: COLORS.primary.primary_400,
                 }}>
-                email@example.com
+                {route.params?.telephone}
               </Text>
             </Text>
           </View>
@@ -79,7 +81,6 @@ const OTPVerification = ({navigation}: Props) => {
               handleCellTextChange={handleCellTextChange}
               inputCount={4}
               keyboardType="numeric"
-              // defaultValue="4563"
               tintColor={COLORS.primary.primary_400}
             />
             <View
@@ -97,25 +98,23 @@ const OTPVerification = ({navigation}: Props) => {
                 }}>
                 Didn't receive the code?
               </Text>
-              <TouchableOpacity onPress={() => console.log('Pressed')}>
+              <TouchableOpacity onPress={handleResend} disabled={isSendLoading}>
                 <Text
                   style={{
                     fontFamily: 'Poppins-SemiBold',
                     fontSize: 12,
                     color: COLORS.primary.primary_400,
                   }}>
+                  {" "}
                   Resend Code
                 </Text>
               </TouchableOpacity>
             </View>
             <View style={styles.buttonWrapper}>
               <AppButton
-                onPress={() => {
-                  showTextAlert();
-                  navigation.navigate('RegistrationConfirmation');
-                }}
+                onPress={handleValidateOtp}
                 type={ButtonType.SOLID}
-                label="Verify Code"
+                label={isLoading ? 'Loading....' : 'Verify Code'}
                 textColors="white"
               />
             </View>
