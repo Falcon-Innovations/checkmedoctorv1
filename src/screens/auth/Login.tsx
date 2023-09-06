@@ -1,4 +1,4 @@
-import React, {useState, useRef} from 'react';
+import React, {useState} from 'react';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 
 import {
@@ -12,18 +12,16 @@ import {
   View,
 } from 'react-native';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
-
 import {AppButton, CustomInput} from '../../../components';
 import {ButtonType} from '../../../components/common/buttons/AppButton';
 import {COLORS, IMAGES, SIZES} from '../../../constants';
 import {KeyboadType} from '../../../components/common/inputs/CustomInput';
-import { RootStackParamList } from '../../navigation/AuthNavigation';
+import {RootStackParamList} from '../../../navigation/AuthNavigation';
+import {useLogin} from '../../api/auth/login';
 
-
-type Props = NativeStackScreenProps<RootStackParamList, 'Login','PersonalDetails'>;
-const Login = ({navigation}:Props) => {
-
-
+type Props = NativeStackScreenProps<RootStackParamList, 'Login'>;
+const Login = ({navigation}: Props) => {
+  const {isLoading, mutate} = useLogin();
   const [inputs, setInputs] = useState({
     password: '',
     email: '',
@@ -55,27 +53,16 @@ const Login = ({navigation}:Props) => {
       isValid = false;
     }
 
-    if (
-      inputs.password &&
-      !/(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+]).{8,}/.test(
-        inputs.password,
-      )
-    ) {
-      isValid = false;
-      handleErrors(
-        'Password must contain at least 8 characters including 1 uppercase letter, 1 lowercase letter, 1 number, and 1 special character',
-        'password',
-      );
-    } else if (!inputs.password) {
+    if (!inputs.password) {
       isValid = false;
       handleErrors('This field is required', 'password');
     }
 
     if (isValid) {
-      Alert.alert(
-        'Valid',
-        `Your email is ${inputs.email} password ${inputs.password} `,
-      );
+      mutate({
+        email: inputs.email,
+        password: inputs.password,
+      })
     } else {
       Alert.alert('Invalid');
     }
@@ -136,7 +123,7 @@ const Login = ({navigation}:Props) => {
               paddingHorizontal: 55,
             }}>
             <AppButton
-              label="Login"
+              label={isLoading ? 'Loading....' : 'Login'}
               onPress={handleValidation}
               type={ButtonType.SOLID}
               textColors={COLORS.white}
@@ -144,7 +131,9 @@ const Login = ({navigation}:Props) => {
           </View>
           <View style={styles.noAccount}>
             <Text style={styles.noAccountText}>Don’t have an account?</Text>
-            <TouchableOpacity onPress={() => navigation.navigate("PersonalDetails")} style={{alignSelf: 'center'}}>
+            <TouchableOpacity
+              onPress={() => navigation.navigate('PersonalDetails')}
+              style={{alignSelf: 'center'}}>
               <Text style={styles.registerText}>Register</Text>
             </TouchableOpacity>
           </View>
@@ -164,7 +153,7 @@ const styles = StyleSheet.create({
   image: {
     width: SIZES.screenWidth,
     height: SIZES.screenHeight * 0.46,
-    alignSelf:"center"
+    alignSelf: 'center',
   },
   login: {
     paddingHorizontal: SIZES.screenPaddingHorizontal,
@@ -203,7 +192,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     marginRight: 5,
   },
-  registerText:{
+  registerText: {
     color: COLORS.primary.primary_400,
     fontFamily: 'Poppins-SemiBold',
     fontSize: 16,

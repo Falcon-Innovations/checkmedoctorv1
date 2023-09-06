@@ -9,23 +9,26 @@ interface CustomProps {
   placeholder?: string;
   value: string;
   error?: any;
-  onChangeText: (text: string) => void;
-  phoneInput?:any;
+  onChangeText?: (text: string) => void;
+  onChangeFormattedText?: (text: string) => void;
+  phoneInput?: any;
 }
 
 const CustomPhoneInput: React.FC<CustomProps> = ({
   value,
   onChangeText,
   placeholder,
-  phoneInput
+  phoneInput,
+  onChangeFormattedText,
+  error,
 }) => {
   const handleValidation = () => {
-     const isValid = phoneInput.current?.isValidNumber(value);
+    const isValid = phoneInput.current?.isValidNumber(value);
     if (value && value.length < 9) {
       return 'Phone number must be at least 9 characters long';
     }
-    if(value && !isValid){
-        return 'Please enter a valid phone number'
+    if (value && !isValid) {
+      return 'Please enter a valid phone number'
     }
     return '';
   };
@@ -37,21 +40,20 @@ const CustomPhoneInput: React.FC<CustomProps> = ({
         borderColor: COLORS.red.red_500,
       };
     }
-    return {
-  
-    };
+    return null
   };
 
-  const error = handleValidation();
+  const errMsg = handleValidation();
 
   const inputStyles = renderInputStyles();
   return (
     <>
       <PhoneNumberInput
-      ref={phoneInput}
+        ref={phoneInput}
         defaultCode="CM"
         layout="second"
         onChangeText={onChangeText}
+        onChangeFormattedText={onChangeFormattedText}
         value={value}
         placeholder={placeholder}
         autoFocus={false}
@@ -59,7 +61,7 @@ const CustomPhoneInput: React.FC<CustomProps> = ({
         textInputStyle={styles.textInputStyle}
         textContainerStyle={styles.textContainerStyle}
       />
-      {error && <Text style={styles.errorMessage}>{error}</Text>}
+      {errMsg && <Text style={styles.errorMessage}>{errMsg}</Text>}
     </>
   );
 };
@@ -71,17 +73,17 @@ const styles = StyleSheet.create({
     width: '100%',
     borderRadius: 6,
     backgroundColor: COLORS.neutral.neutral_50,
-    marginBottom:12,
+    marginBottom: 12,
     height: 50,
 
-    
+
   },
   textInputStyle: {
     height: 48,
     backgroundColor: COLORS.neutral.neutral_50,
     paddingLeft: 12,
     fontSize: 12,
-  
+
   },
   textContainerStyle: {
     backgroundColor: COLORS.neutral.neutral_50,
