@@ -1,4 +1,4 @@
-import React, {useState, useRef} from 'react';
+import React, {useState} from 'react';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 
 import {
@@ -12,7 +12,6 @@ import {
   View,
 } from 'react-native';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
-
 import {AppButton, CustomInput} from '../../../components';
 import {ButtonType} from '../../../components/common/buttons/AppButton';
 import {COLORS, IMAGES, SIZES} from '../../../constants';
@@ -22,7 +21,7 @@ import {useLogin} from '../../api/auth/login';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Login'>;
 const Login = ({navigation}: Props) => {
-  const {isLoading, error, mutate} = useLogin();
+  const {isLoading, mutate} = useLogin();
   const [inputs, setInputs] = useState({
     password: '',
     email: '',
@@ -60,10 +59,6 @@ const Login = ({navigation}: Props) => {
     }
 
     if (isValid) {
-      Alert.alert(
-        'Valid',
-        `Your email is ${inputs.email} password ${inputs.password} `,
-      );
       mutate({
         email: inputs.email,
         password: inputs.password,

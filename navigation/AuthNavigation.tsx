@@ -39,8 +39,9 @@ const AuthNavigation = () => {
 
   return (
     <Stack.Navigator
-      initialRouteName="onBoarding"
+      initialRouteName={isFirstLaunch ? "onBoarding" : "Login"}
       screenOptions={{headerShown: false}}>
+      <Stack.Screen name="ImageUpload" component={ImageUpload} />
       <Stack.Screen name="onBoarding" component={Onboarding} />
       <Stack.Screen name="PersonalDetails" component={PersonalDetails} />
       <Stack.Screen name="Login" component={Login} />
@@ -49,7 +50,6 @@ const AuthNavigation = () => {
         component={ProfessionalDetails}
       />
       <Stack.Screen name="OTPVerification" component={OTPVerification} />
-      <Stack.Screen name="ImageUpload" component={ImageUpload} />
       <Stack.Screen
         name="RegistrationConfirmation"
         component={RegistrationConfirmation}

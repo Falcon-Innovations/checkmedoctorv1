@@ -5,7 +5,6 @@ import { Alert } from 'react-native';
 
 async function authRequestInterceptor(config: InternalAxiosRequestConfig) {
   const token = await getToken();
-  console.log(token);
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
   }

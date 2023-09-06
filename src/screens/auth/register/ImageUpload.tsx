@@ -1,23 +1,21 @@
 import {Image, SafeAreaView, StyleSheet, Text, View} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import React, {useState} from 'react';
-
 import ImageCropPicker from 'react-native-image-crop-picker';
-
-import {NativeStackScreenProps} from '@react-navigation/native-stack';
-import {RootStackParamList} from '../../../../navigation/AuthNavigation';
 import {AppButton, TopHeader} from '../../../../components';
 import {CommonAuthHeader} from '../../../../components/common/header';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {COLORS, IMAGES, SIZES} from '../../../../constants';
 import {ButtonType} from '../../../../components/common/buttons/AppButton';
+import {useChangeAvatar} from '../../../api/user/change-avatar';
+import Loader from '../../../../components/loader';
 
-type Props = NativeStackScreenProps<RootStackParamList, 'ImageUpload'>;
 
-const ImageUpload = ({navigation}: Props) => {
+const ImageUpload = () => {
+  const {mutate, isLoading} = useChangeAvatar()
   const [image, setImage] = useState<string | null>(null);
 
-  const handleImagePicker = async () => {
+  const handlePickImage = async () => {
     try {
       const image = await ImageCropPicker.openPicker({
         width: 300,
@@ -31,11 +29,11 @@ const ImageUpload = ({navigation}: Props) => {
       console.log(error);
     }
   };
-
-  console.log(image);
+  const handleSubmit = () => mutate({file: image})
 
   return (
     <>
+      {isLoading && <Loader />}
       <TopHeader screenTitle="Image Upload" />
       <SafeAreaView style={{flex: 1}}>
         <KeyboardAwareScrollView
@@ -77,10 +75,7 @@ const ImageUpload = ({navigation}: Props) => {
               <AppButton
                 width={112}
                 label="Upload"
-                onPress={() => {
-                  // console.log('how far');
-                  handleImagePicker();
-                }}
+                onPress={handlePickImage}
                 type={ButtonType.TEXT}
                 bgColor="#ffffff"
                 leftIcon={
@@ -94,24 +89,19 @@ const ImageUpload = ({navigation}: Props) => {
               />
             </View>
           </View>
-
-          {/* {image && ( */}
           <View
             style={{
               alignSelf: 'center',
               marginTop: SIZES.screenHeight * 0.05,
             }}>
             <AppButton
-              label="Complete Registration"
-              onPress={() => {
-                console.log('Successs');
-                navigation.navigate('OTPVerification');
-              }}
+              label={isLoading ? 'Loading....' : "Complete Registration"}
+              onPress={handleSubmit}
               type={ButtonType.SOLID}
               textColors={COLORS.white}
+              disabled={isLoading || !image}
             />
           </View>
-          {/* )} */}
         </KeyboardAwareScrollView>
       </SafeAreaView>
     </>
