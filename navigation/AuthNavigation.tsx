@@ -48,8 +48,8 @@ const AuthNavigation = () => {
         name="ProfessionalDetails"
         component={ProfessionalDetails}
       />
-      <Stack.Screen name="ImageUpload" component={ImageUpload} />
       <Stack.Screen name="OTPVerification" component={OTPVerification} />
+      <Stack.Screen name="ImageUpload" component={ImageUpload} />
       <Stack.Screen
         name="RegistrationConfirmation"
         component={RegistrationConfirmation}

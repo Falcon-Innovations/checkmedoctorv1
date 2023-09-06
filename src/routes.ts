@@ -8,4 +8,5 @@ export const Routes = {
   OnBoarding: 'onBoarding',
   PersonalDetails: 'PersonalDetails',
   ProfessionalDetails: 'ProfessionalDetails',
+  ImageUpload: 'ImageUpload',
 };

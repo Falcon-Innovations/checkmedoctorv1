@@ -13,6 +13,7 @@ import {COLORS, IMAGES, SIZES} from '../../../constants';
 import {AppButton} from '../../../components';
 import {RootStackParamList} from '../../../navigation/AuthNavigation';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
+import {Routes} from '../../routes';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'onBoarding'>;
 
@@ -65,7 +66,7 @@ const Onboarding = ({navigation}: Props) => {
           }}>
           <AppButton
             label="Get Started"
-            onPress={() => navigation.navigate('PersonalDetails')}
+            onPress={() => navigation.navigate(Routes.PersonalDetails)}
             width={SIZES.screenWidth * 0.4}
             bgColor={COLORS.white}
             rightIcon={

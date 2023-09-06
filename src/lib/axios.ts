@@ -3,8 +3,9 @@ import { getToken } from '../utils/storage';
 import { BASE_URL } from '../utils/config';
 import { Alert } from 'react-native';
 
-function authRequestInterceptor(config: InternalAxiosRequestConfig) {
-  const token = getToken();
+async function authRequestInterceptor(config: InternalAxiosRequestConfig) {
+  const token = await getToken();
+  console.log(token);
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
   }

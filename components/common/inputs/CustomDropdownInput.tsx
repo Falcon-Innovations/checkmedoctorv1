@@ -13,7 +13,7 @@ interface Props {
   placeholder?: string;
   label?: string;
   data: Option[];
-  selectedValue: string;
+  selectedValue: any;
   onChange: (value: Option) => void;
 }
 

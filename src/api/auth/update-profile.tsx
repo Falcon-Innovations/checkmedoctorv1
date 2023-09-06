@@ -1,8 +1,8 @@
 import {useMutation} from 'react-query';
 import {axios} from '../../lib/axios';
-import {storeToken} from '../../utils/storage';
-import {LoginResponse} from '../../types/auth';
 import {navigate} from '../../../navigation/RootNavigator';
+import {Routes} from '../../routes';
+import {Alert} from 'react-native';
 
 
 type Payload = {
@@ -15,19 +15,18 @@ type Payload = {
     licenceNumber: string
     bio: string
     qualification: string
+    specialty: string
+    yearsOfExp: string
 };
 
 
-export const updateProfile = (data: Partial<Payload>): Promise<LoginResponse> => axios.post('/specialists/update-me', data);
+export const updateProfile = (data: Partial<Payload>): Promise<any> => axios.patch('/specialists/update-me', data);
 
-export const useUpdateProfile = () => {
-    return useMutation({
-        onSuccess: (data, variables) => {
-            console.log(data)
-            storeToken(data.token).then(() =>
-                navigate('OTPVerification', variables)
-            );
-        },
-        mutationFn: updateProfile,
-    });
-};
+export const useUpdateProfile = () => useMutation({
+    onSuccess: (data) => {
+        console.log(data)
+        Alert.alert('Profile Updated');
+        navigate(Routes.ImageUpload)
+    },
+    mutationFn: updateProfile,
+});
